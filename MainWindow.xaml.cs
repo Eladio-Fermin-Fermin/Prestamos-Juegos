@@ -24,5 +24,35 @@ namespace PrestamosJuegos
         {
             InitializeComponent();
         }
+
+        private void AmigosMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void JuegosMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PrestamosMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AmigoMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void JuegoMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PrestamoMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

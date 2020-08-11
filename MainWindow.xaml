@@ -5,8 +5,68 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrestamosJuegos"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Menú principal" Height="450" Width="800">
     <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="69*"/>
+            <ColumnDefinition Width="723*"/>
+            <ColumnDefinition Width="8*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.ColumnSpan="3">
+            <Menu Height="46">
+                <MenuItem Header="   Registros" Width="94"   >
+
+                    <!--<MenuItem.Icon>
+                       <Image Source="/Resources/Registro.png" Margin="-4,-15,-14,-15
+                    </MenuItem.Icon>"/-->
+
+                    <MenuItem x:Name="AmigosMenuItem" Header="Amigos" Click="AmigosMenuItem_Click">
+                        <!-- <MenuItem.Icon>
+                            <Image Source="/Resources/Usuario.png" />
+                        </MenuItem.Icon>-->
+                    </MenuItem>
+
+                    <MenuItem  x:Name="JuegosMenuItem" Header="Juegos" Click="JuegosMenuItem_Click">
+                        <!--<MenuItem.Icon>
+                            <Image Source="/Resources/Cliente.png"/>
+                        </MenuItem.Icon>-->
+                    </MenuItem>
+
+                    <MenuItem x:Name="PrestamosMenuItem" Header="Prestamos" Click="PrestamosMenuItem_Click">
+                        <!-- <MenuItem.Icon>
+                            <Image Source="/Resources/Venta.png"/>
+                        </MenuItem.Icon>-->
+                    </MenuItem>
+
+                </MenuItem>
+
+                <!--Consultas-->
+                <MenuItem Header="   Consultas"  Height="46" Width="92"  >
+
+                    <!--<MenuItem.Icon>
+                        <Image Source="/Resources/Consulta.jfif"  Margin="-4,-15,-14,-15"/>
+                    </MenuItem.Icon>-->
+
+                    <MenuItem Name="AmigoMenuItem" Header="Consulta Amigos" Click="AmigoMenuItem_Click"/>
+                    <MenuItem Name="JuegoMenuItem" Header="Consulta Juegos" Click="JuegoMenuItem_Click"/>
+                    <MenuItem Name="PrestamoMenuItem" Header="Consulta Prestamos" Click="PrestamoMenuItem_Click"/>
+
+                </MenuItem>
+
+                <MenuItem Header="   Ayuda" Width="72" >
+                   <!-- <MenuItem.Icon>
+                        <Image Source="/Resources/Ayuda.jfif"  Margin="-4,-15,-14,-15"/>
+                    </MenuItem.Icon>-->
+
+                    <MenuItem x:Name="InformacionMenuItem" Header="Informacion" />
+                </MenuItem>
+            </Menu>
+            <!--<StackPanel Height="360">
+                <Image Width="598" Source="/Resources/Fondo.jfif" Height="451"/>
+            </StackPanel> -->
+        </StackPanel>
+
 
     </Grid>
 </Window>
