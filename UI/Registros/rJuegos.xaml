@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrestamosJuegos.UI.Registros"
         mc:Ignorable="d"
-        Title="rJuegos" Height="450" Width="800">
+        Title="Registro Juegos" Height="450" Width="800">
     <Grid>
         
     </Grid>

@@ -16,6 +16,6 @@ namespace PrestamosJuegos.Entidades
         public int CantidadJuegos { get; set; }
 
         [ForeignKey("PrestamoId")]
-        public virtual List<PrestamosDetalle> PrestamosDetalles { get; set; } = new List<PrestamosDetalle>();
+        public virtual List<PrestamosDetalle> Detalles { get; set; } = new List<PrestamosDetalle>();
     }
 }

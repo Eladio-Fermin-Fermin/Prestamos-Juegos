@@ -29,18 +29,20 @@ namespace PrestamosJuegos
 
         private void AmigosMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            rAmigos Ramigos = new rAmigos();
-            Ramigos.Show();
+            rAmigos ramigos = new rAmigos();
+            ramigos.Show();
         }
 
         private void JuegosMenuItem_Click(object sender, RoutedEventArgs e)
         {
-
+            rJuegos rjuegos = new rJuegos();
+            rjuegos.Show();
         }
 
         private void PrestamosMenuItem_Click(object sender, RoutedEventArgs e)
         {
-
+            rPrestamos rprestamos = new rPrestamos();
+            rprestamos.Show();
         }
 
         private void AmigoMenuItem_Click(object sender, RoutedEventArgs e)

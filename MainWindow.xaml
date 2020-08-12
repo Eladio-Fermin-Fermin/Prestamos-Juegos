@@ -5,14 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrestamosJuegos"
         mc:Ignorable="d"
+        Icon="/Resources/xbox.ico"
         Title="Menú principal" Height="450" Width="800">
     <Grid>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="69*"/>
-            <ColumnDefinition Width="723*"/>
-            <ColumnDefinition Width="8*"/>
-        </Grid.ColumnDefinitions>
         <StackPanel Grid.ColumnSpan="3">
             <Menu Height="46">
                 <MenuItem Header="   Registros" Width="94"   >
