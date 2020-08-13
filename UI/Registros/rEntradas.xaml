@@ -27,36 +27,38 @@
                 <DatePicker Name="FechaDatePicker"  SelectedDate="{Binding FechaEntrada,StringFormat=dd/MM/yyyy}"   />
 
                 <Label Content="JuegoId:"/>
-                <TextBox x:Name="JuegoIdTextBox" Text="{Binding JuegoId}"/>
-
-                <Label Content="Cantidad:"/>
+                <!--<TextBox x:Name="JuegoIdTextBox" Text="{Binding JuegoId}"/>-->
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox x:Name="JuegoIdComboBox" SelectedValue="{Binding JuegoId}" Width="100"/>
+                     </StackPanel>
+                <Label Content="Cantidad:" />
                 <TextBox x:Name="CantidadTextBox" Text="{Binding Cantidad}"/>
 
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="32,15">
+                    <Button x:Name="NuevoButton" Click="NuevoButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/add.png" Height="20"/>
+                            <Label Content="Nuevo"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="GuardarButton" Margin="15,0" Click="GuardarButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Guardar.png" Height="20"/>
+                            <Label Content="Guardar"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="EliminarButton" Click="EliminarButton_Click" >
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Eliminar.png" Height="20"/>
+                            <Label Content="Eliminar"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Margin="32,15">
-                <Button x:Name="NuevoButton" Click="NuevoButton_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/add.png" Height="20"/>
-                        <Label Content="Nuevo"/>
-                    </StackPanel>
-                </Button>
-
-                <Button x:Name="GuardarButton" Margin="15,0" Click="GuardarButton_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Guardar.png" Height="20"/>
-                        <Label Content="Guardar"/>
-                    </StackPanel>
-                </Button>
-
-                <Button x:Name="EliminarButton" Click="EliminarButton_Click" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Eliminar.png" Height="20"/>
-                        <Label Content="Eliminar"/>
-                    </StackPanel>
-                </Button>
-            </StackPanel>
-        </StackPanel>
 
     </Grid>
 </Window>

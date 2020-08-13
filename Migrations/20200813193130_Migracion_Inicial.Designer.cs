@@ -9,7 +9,7 @@ using PrestamosJuegos.DAL;
 namespace PrestamosJuegos.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20200813131644_Migracion_Inicial")]
+    [Migration("20200813193130_Migracion_Inicial")]
     partial class Migracion_Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,6 +64,8 @@ namespace PrestamosJuegos.Migrations
 
                     b.HasKey("EntradaId");
 
+                    b.HasIndex("JuegoId");
+
                     b.ToTable("Entradas");
                 });
 
@@ -96,7 +98,7 @@ namespace PrestamosJuegos.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AmigoId")
+                    b.Property<int?>("AmigoId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("CantidadJuegos")
@@ -104,6 +106,9 @@ namespace PrestamosJuegos.Migrations
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("JuegoId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Observacion")
                         .HasColumnType("TEXT");
@@ -139,13 +144,20 @@ namespace PrestamosJuegos.Migrations
                     b.ToTable("PrestamosDetalle");
                 });
 
+            modelBuilder.Entity("PrestamosJuegos.Entidades.Entradas", b =>
+                {
+                    b.HasOne("PrestamosJuegos.Entidades.Juegos", "Nacionalidad")
+                        .WithMany()
+                        .HasForeignKey("JuegoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("PrestamosJuegos.Entidades.Prestamos", b =>
                 {
                     b.HasOne("PrestamosJuegos.Entidades.Amigos", "Amigo")
                         .WithMany()
-                        .HasForeignKey("AmigoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AmigoId");
                 });
 
             modelBuilder.Entity("PrestamosJuegos.Entidades.PrestamosDetalle", b =>

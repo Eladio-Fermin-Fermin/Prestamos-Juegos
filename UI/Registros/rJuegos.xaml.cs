@@ -21,12 +21,10 @@ namespace PrestamosJuegos.UI.Registros
     public partial class rJuegos : Window
     {
         private Juegos juegos = new Juegos();
-        private Entradas entradas = new Entradas();
         public rJuegos()
         {
             InitializeComponent();
             this.DataContext = juegos;
-            this.DataContext = entradas;
         }
 
         public void Limpiar()
@@ -77,7 +75,6 @@ namespace PrestamosJuegos.UI.Registros
         }
 
 
-
         private void BuscarButton_Click(object sender, RoutedEventArgs e)
         {
             if (!Regex.IsMatch(JuegoIdTextBox.Text, "^[1-9]+$"))
@@ -92,7 +89,6 @@ namespace PrestamosJuegos.UI.Registros
             {
                 juegos = encontrado;
                 this.DataContext = juegos;
-                
             }
             else
             {

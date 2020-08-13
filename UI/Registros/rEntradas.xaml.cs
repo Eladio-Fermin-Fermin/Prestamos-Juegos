@@ -21,12 +21,16 @@ namespace PrestamosJuegos.UI.Registros
     public partial class rEntradas : Window
     {
         private Entradas entradas = new Entradas();
-        private rJuegos juegos = new rJuegos();
         public rEntradas()
         {
             InitializeComponent();
             this.DataContext = entradas;
-            this.DataContext = juegos;
+            var Lista = JuegosBLL.GetList(x => true);
+            this.JuegoIdComboBox.ItemsSource = Lista;
+            this.JuegoIdComboBox.SelectedValuePath = "JuegoId";
+            this.JuegoIdComboBox.DisplayMemberPath = "Descripcion";
+            if (Lista.Count > 0)
+                this.JuegoIdComboBox.SelectedIndex = 0;
         }
 
         public void Limpiar()
@@ -37,34 +41,34 @@ namespace PrestamosJuegos.UI.Registros
 
         public bool Validar()
         {
-            if (!Regex.IsMatch(EntradaIdTextBox.Text, "^[1-9]+$"))
-            {
-                MessageBox.Show("Asegúrese de haber ingresado un Id de caracter numerico y que sea mayor a 0.",
-                    "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+            //if (!Regex.IsMatch(EntradaIdTextBox.Text, "^[1-9]+$"))
+            //{
+            //    MessageBox.Show("Asegúrese de haber ingresado un Id de caracter numerico y que sea mayor a 0.",
+            //        "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return false;
+            //}
 
             //válida que no hayan campos vacíos.
-            if (JuegoIdTextBox.Text.Length == 0 || CantidadTextBox.Text.Length == 0)
-            {
-                MessageBox.Show("Asegúrese de haber llenado todos los campos.", "Campos vacíos",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
-                return false;
-            }
+            //if (JuegoIdTextBox.Text.Length == 0 || CantidadTextBox.Text.Length == 0)
+            //{
+            //    MessageBox.Show("Asegúrese de haber llenado todos los campos.", "Campos vacíos",
+            //        MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return false;
+            //}
 
-            if (!Regex.IsMatch(JuegoIdTextBox.Text, "^[1-9]+$"))
-            {
-                MessageBox.Show("Asegúrese de haber ingresado un Id de caracter numerico y que sea mayor a 0.",
-                    "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+            //if (!Regex.IsMatch(JuegoIdTextBox.Text, "^[1-9]+$"))
+            //{
+            //    MessageBox.Show("Asegúrese de haber ingresado un Id de caracter numerico y que sea mayor a 0.",
+            //        "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return false;
+            //}
 
-            if (!JuegosBLL.Existe(int.Parse(JuegoIdTextBox.Text)))
-            {
-                MessageBox.Show("Este juego no se encontro en la base de datos. Recuerde crear el juego antes de darle una entrada.",
-                    "No existe.", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+            //if (!JuegosBLL.Existe(int.Parse(JuegoIdTextBox.Text)))
+            //{
+            //    MessageBox.Show("Este juego no se encontro en la base de datos. Recuerde crear el juego antes de darle una entrada.",
+            //        "No existe.", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return false;
+            //}
 
             return true;
         }
@@ -102,7 +106,6 @@ namespace PrestamosJuegos.UI.Registros
 
             if (EntradasBLL.Guardar(entradas))
             {
-                CantidadTextBox.Text = juegos.ExistenciaTextBox.Text;
                 Limpiar();
                 MessageBox.Show("Guardado.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
             }

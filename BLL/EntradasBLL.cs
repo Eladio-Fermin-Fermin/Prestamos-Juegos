@@ -42,8 +42,15 @@ namespace PrestamosJuegos.BLL
             try
             {
                 //Agregar la entidad que se desea insertar al contexto
-                contexto.Entradas.Add(entradas);
-                paso = contexto.SaveChanges() > 0;
+
+                var Juego = JuegosBLL.Buscar(entradas.JuegoId);
+
+                Juego.Existencia += entradas.Cantidad;
+                if (JuegosBLL.Guardar(Juego))
+                {
+                    contexto.Entradas.Add(entradas);
+                    paso = contexto.SaveChanges() > 0;
+                }
             }
             catch (Exception)
             {
@@ -169,7 +176,7 @@ namespace PrestamosJuegos.BLL
 
         public static void ModificaInventario(Entradas NuevaEntrada)
         {
-            Entradas entrada = Buscar(NuevaEntrada.EntradaId);//Se buscala entrada anterior
+            Entradas entrada = Buscar(NuevaEntrada.EntradaId);//Se busca entrada anterior
             Juegos juego = JuegosBLL.Buscar(NuevaEntrada.JuegoId);//Se busca el juego a modificar
 
             juego.Existencia -= entrada.Cantidad;//Se le resta la cantidad de la entrada anterior.

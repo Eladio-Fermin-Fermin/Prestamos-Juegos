@@ -16,5 +16,13 @@ namespace PrestamosJuegos.Entidades
 
         [ForeignKey("JuegoId")]
         public virtual Juegos Juego { get; set; }
+
+        public PrestamosDetalle(int cantidad)
+        {
+            Id = 0;
+            PrestamoId = 0;
+            JuegoId = 0;
+            Cantidad = cantidad;
+        }
     }
 }

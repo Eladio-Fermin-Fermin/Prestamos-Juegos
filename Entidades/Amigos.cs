@@ -14,6 +14,6 @@ namespace PrestamosJuegos.Entidades
         public string Telefono { get; set; }
         public string Celular { get; set; }
         public string Email { get; set; }
-        public DateTime FechaNacimiento {get; set; }
+        public DateTime FechaNacimiento { get; set; } = DateTime.Now;
     }
 }

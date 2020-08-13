@@ -11,7 +11,7 @@ namespace PrestamosJuegos.Entidades
         [Key]
         public int PrestamoId { get; set; }
         public DateTime Fecha { get; set; } = DateTime.Now;
-        public int AmigoId { get; set; }
+        public int JuegoId { get; set; }
         public string Observacion { get; set; }
         public int CantidadJuegos { get; set; }
 

@@ -42,7 +42,12 @@ namespace PrestamosJuegos.BLL
 
             try
             {
-                //Agregar la entidad que se desea insertar al contexto
+                foreach(var item in prestamos.Detalles)
+                {
+                    item.Juego.Existencia -= item.Cantidad;
+                    contexto.Entry(item.Juego).State = EntityState.Modified;
+                }
+
                 contexto.Prestamos.Add(prestamos);
                 paso = contexto.SaveChanges() > 0;
             }
