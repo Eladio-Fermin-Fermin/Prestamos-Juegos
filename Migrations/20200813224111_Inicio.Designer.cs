@@ -9,8 +9,8 @@ using PrestamosJuegos.DAL;
 namespace PrestamosJuegos.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20200813193130_Migracion_Inicial")]
-    partial class Migracion_Inicial
+    [Migration("20200813224111_Inicio")]
+    partial class Inicio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

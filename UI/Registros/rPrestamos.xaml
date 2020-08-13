@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrestamosJuegos.UI.Registros"
         mc:Ignorable="d"
-        Title="Registro Prestamos" Height="480" Width="695">
+        Title="Registro Prestamos" Height="490" Width="700">
     <Grid>
 
         <StackPanel Orientation="Vertical" >
@@ -16,7 +16,7 @@
             <!--"BucarButton_Click"-->
             <StackPanel Orientation="Horizontal" >
 
-                <TextBox x:Name="VentaIdTextBox" Width="150" Text="{Binding PrestamoId}" Height="22"/>
+                <TextBox x:Name="PrestamoIdTextBox" Width="150" Text="{Binding PrestamoId}" Height="22"/>
 
                 <Button Name="BucarButton" Margin="20,0" Click="BucarButton_Click" >
                     <StackPanel Orientation="Horizontal">
@@ -64,7 +64,7 @@
                         </Button>
 
                     </StackPanel>
-                    <DataGrid x:Name="DetalleDataGrid" AlternatingRowBackground="#FFBAE3FF" AutoGenerateColumns="False" ItemsSource="{Binding VentaDetalle}" Margin="0,5,0,0" Width="675"  Height="189">
+                    <DataGrid x:Name="DetalleDataGrid" ItemsSource="{Binding Detalle}" AlternatingRowBackground="#FFBAE3FF" AutoGenerateColumns="False" Margin="0,5,0,0" Width="675"  Height="189">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id"  Binding="{Binding Id}"/>

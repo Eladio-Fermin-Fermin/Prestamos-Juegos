@@ -17,27 +17,27 @@
                     </MenuItem.Icon>"/-->
 
                     <MenuItem x:Name="AmigosMenuItem" Header="Amigos" Click="AmigosMenuItem_Click">
-                        <!-- <MenuItem.Icon>
-                            <Image Source="/Resources/Usuario.png" />
-                        </MenuItem.Icon>-->
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/amigo.png" />
+                        </MenuItem.Icon>
                     </MenuItem>
 
                     <MenuItem  x:Name="JuegosMenuItem" Header="Juegos" Click="JuegosMenuItem_Click">
-                        <!--<MenuItem.Icon>
-                            <Image Source="/Resources/Cliente.png"/>
-                        </MenuItem.Icon>-->
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/gamer.png"/>
+                        </MenuItem.Icon>
                     </MenuItem>
 
                     <MenuItem x:Name="PrestamosMenuItem" Header="Prestamos" Click="PrestamosMenuItem_Click">
-                        <!-- <MenuItem.Icon>
-                            <Image Source="/Resources/Venta.png"/>
-                        </MenuItem.Icon>-->
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/prestamo.png"/>
+                        </MenuItem.Icon>
                     </MenuItem>
 
                     <MenuItem x:Name="EntradasMenuItem" Header="Entradas" Click="EntradasMenuItem_Click">
-                        <!-- <MenuItem.Icon>
-                            <Image Source="/Resources/Venta.png"/>
-                        </MenuItem.Icon>-->
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/entrada.png"/>
+                        </MenuItem.Icon>
                     </MenuItem>
 
                 </MenuItem>

@@ -70,13 +70,19 @@ namespace PrestamosJuegos.UI.Registros
 
         private void AgregarButton_Click(object sender, RoutedEventArgs e)
         {
-            prestamos.Detalles.Add(new PrestamosDetalle(prestamos.JuegoId));
+            var Detalle = new PrestamosDetalle
+            {
+                PrestamoId = this.prestamos.PrestamoId, 
+                JuegoId = Convert.ToInt32(JuegoIdComboBox.SelectedValue.ToString()),
+                Cantidad = Convert.ToInt32(CantidadTextBox.Text)
+            };
 
+            //this.
             Cargar();
-            DescripcionTextBox.Focus();
-            DescripcionTextBox.Clear();
+
+            JuegoIdComboBox.SelectedIndex = -1;
             CantidadTextBox.Clear();
-            //RequerimientoTextBox.Focus();
+
         }
 
         private void RemoverButton_Click(object sender, RoutedEventArgs e)

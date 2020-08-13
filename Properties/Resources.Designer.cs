@@ -83,6 +83,16 @@ namespace PrestamosJuegos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] amigo {
+            get {
+                object obj = ResourceManager.GetObject("amigo", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Buscar {
             get {
                 object obj = ResourceManager.GetObject("Buscar", resourceCulture);
@@ -103,6 +113,16 @@ namespace PrestamosJuegos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] entrada {
+            get {
+                object obj = ResourceManager.GetObject("entrada", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] gamer {
             get {
                 object obj = ResourceManager.GetObject("gamer", resourceCulture);
@@ -116,6 +136,26 @@ namespace PrestamosJuegos.Properties {
         internal static byte[] Guardar {
             get {
                 object obj = ResourceManager.GetObject("Guardar", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] prestamo {
+            get {
+                object obj = ResourceManager.GetObject("prestamo", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] prestamo1 {
+            get {
+                object obj = ResourceManager.GetObject("prestamo1", resourceCulture);
                 return ((byte[])(obj));
             }
         }
