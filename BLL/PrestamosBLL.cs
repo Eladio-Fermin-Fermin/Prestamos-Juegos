@@ -69,46 +69,55 @@ namespace PrestamosJuegos.BLL
         //Metodo Buscar.
         public static Prestamos Buscar(int id)
         {
-            Prestamos prestamos = new Prestamos();
             Contexto contexto = new Contexto();
+            Prestamos prestamo;
 
             try
             {
-                prestamos = contexto.Prestamos.Find(id);
+                prestamo = contexto.Prestamos.Where(p => p.PrestamoId == id).Include(p => p.Detalles)
+                    .ThenInclude(d => d.Juego).SingleOrDefault();
             }
             catch (Exception)
             {
+
                 throw;
             }
             finally
             {
                 contexto.Dispose();
             }
-            return prestamos;
+
+            return prestamo;
         }
 
         //Metodo Modificar.
-        private static bool Modificar(Prestamos prestamos)
+        private static bool Modificar(Prestamos prestamo)
         {
-            bool paso = false;
             Contexto contexto = new Contexto();
-
+            bool ok = false;
             try
             {
-                //marcar la entidad como modificada para que el contexto sepa como proceder
-                contexto.Entry(prestamos).State = EntityState.Modified;
-                paso = contexto.SaveChanges() > 0;
+                contexto.Database.ExecuteSqlRaw($"Delete FROM PrestamoDetalle Where PrestamoId={prestamo.PrestamoId}");
+                foreach (var item in prestamo.Detalles)
+                {
+                    contexto.Entry(item).State = EntityState.Added;
+                }
+                contexto.Entry(prestamo).State = EntityState.Modified;
+                ok = contexto.SaveChanges() > 0;
             }
             catch (Exception)
             {
+
                 throw;
             }
             finally
             {
                 contexto.Dispose();
             }
-            return paso;
+
+            return ok;
         }
+
 
         //Metodo Eliminar.
         public static bool Eliminar(int id)

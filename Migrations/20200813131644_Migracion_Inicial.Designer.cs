@@ -9,7 +9,7 @@ using PrestamosJuegos.DAL;
 namespace PrestamosJuegos.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20200812170205_Migracion_Inicial")]
+    [Migration("20200813131644_Migracion_Inicial")]
     partial class Migracion_Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace PrestamosJuegos.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Cedula")
+                    b.Property<string>("Celular")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Direccion")
@@ -110,6 +110,8 @@ namespace PrestamosJuegos.Migrations
 
                     b.HasKey("PrestamoId");
 
+                    b.HasIndex("AmigoId");
+
                     b.ToTable("Prestamos");
                 });
 
@@ -130,13 +132,30 @@ namespace PrestamosJuegos.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("JuegoId");
+
                     b.HasIndex("PrestamoId");
 
                     b.ToTable("PrestamosDetalle");
                 });
 
+            modelBuilder.Entity("PrestamosJuegos.Entidades.Prestamos", b =>
+                {
+                    b.HasOne("PrestamosJuegos.Entidades.Amigos", "Amigo")
+                        .WithMany()
+                        .HasForeignKey("AmigoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("PrestamosJuegos.Entidades.PrestamosDetalle", b =>
                 {
+                    b.HasOne("PrestamosJuegos.Entidades.Juegos", "Juego")
+                        .WithMany()
+                        .HasForeignKey("JuegoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PrestamosJuegos.Entidades.Prestamos", null)
                         .WithMany("Detalles")
                         .HasForeignKey("PrestamoId")

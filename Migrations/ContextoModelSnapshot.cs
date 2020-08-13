@@ -22,7 +22,7 @@ namespace PrestamosJuegos.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Cedula")
+                    b.Property<string>("Celular")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Direccion")
@@ -108,6 +108,8 @@ namespace PrestamosJuegos.Migrations
 
                     b.HasKey("PrestamoId");
 
+                    b.HasIndex("AmigoId");
+
                     b.ToTable("Prestamos");
                 });
 
@@ -128,13 +130,30 @@ namespace PrestamosJuegos.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("JuegoId");
+
                     b.HasIndex("PrestamoId");
 
                     b.ToTable("PrestamosDetalle");
                 });
 
+            modelBuilder.Entity("PrestamosJuegos.Entidades.Prestamos", b =>
+                {
+                    b.HasOne("PrestamosJuegos.Entidades.Amigos", "Amigo")
+                        .WithMany()
+                        .HasForeignKey("AmigoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("PrestamosJuegos.Entidades.PrestamosDetalle", b =>
                 {
+                    b.HasOne("PrestamosJuegos.Entidades.Juegos", "Juego")
+                        .WithMany()
+                        .HasForeignKey("JuegoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PrestamosJuegos.Entidades.Prestamos", null)
                         .WithMany("Detalles")
                         .HasForeignKey("PrestamoId")

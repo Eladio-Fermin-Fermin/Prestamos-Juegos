@@ -70,10 +70,12 @@ namespace PrestamosJuegos.BLL
         {
             Juegos juegos = new Juegos();
             Contexto contexto = new Contexto();
+            Entradas entradas = new Entradas();
 
             try
             {
                 juegos = contexto.Juegos.Find(id);
+               // entradas = contexto.Entradas.
             }
             catch (Exception)
             {
@@ -157,6 +159,31 @@ namespace PrestamosJuegos.BLL
                 contexto.Dispose();
             }
             return Lista;
+        }
+
+        public static Juegos DoplicadoJuego(string descripcion)
+        {
+            Contexto contexto = new Contexto();
+            List<Juegos> lista = new List<Juegos>();
+            Juegos juego;
+
+            try
+            {
+                lista = contexto.Juegos.ToList();
+                juego = lista.Find(j => j.Descripcion == descripcion);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+
+            return juego;
         }
     }
 }

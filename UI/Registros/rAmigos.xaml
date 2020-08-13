@@ -32,8 +32,8 @@
                 <Label Content="Telefono:"/>
                 <TextBox x:Name="TelefonoTextBox" Text="{Binding Telefono}"/>
 
-                <Label Content="Cedula:"/>
-                <TextBox x:Name="CedulaTextBox" Text="{Binding Cedula}"/>
+                <Label Content="Celular:"/>
+                <TextBox x:Name="CelularTextBox" Text="{Binding Celular}"/>
                 
                 <Label Content="Email:"/>
                 <TextBox x:Name="EmailTextBox" Text="{Binding Email}"/>
@@ -44,7 +44,7 @@
             </StackPanel>
 
             <Label Content="Fecha"/>
-            <DatePicker Name="FechaDatePicker"  SelectedDate="{Binding Fecha,StringFormat=dd/MM/yyyy}"   />
+            <DatePicker Name="FechaNacimientoDatePicker"  SelectedDate="{Binding FechaNacimiento,StringFormat=dd/MM/yyyy}"   />
 
 
             <StackPanel Orientation="Horizontal" Margin="10,15">

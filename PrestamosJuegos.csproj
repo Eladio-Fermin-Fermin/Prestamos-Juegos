@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="DATA\Juegos.db" />
     <None Remove="Resources\add.png" />
     <None Remove="Resources\agregar.png" />
     <None Remove="Resources\Buscar.png" />
@@ -15,10 +16,6 @@
     <None Remove="Resources\gamer.png" />
     <None Remove="Resources\Guardar.png" />
     <None Remove="Resources\xbox.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DATA\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="DATA\Juegos.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\add.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

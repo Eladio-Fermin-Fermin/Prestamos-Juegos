@@ -5,8 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrestamosJuegos.UI.Registros"
         mc:Ignorable="d"
-        Title="Registro Entradas" Height="450" Width="800">
+        Title="Registro Entradas" Height="293" Width="324">
     <Grid>
-        
+
+        <StackPanel Orientation="Vertical" Margin="4,0,4,0">
+            <StackPanel Orientation="Vertical">
+                <Label Content="EntradaId:"/>
+                <!-- -->
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="EntradaIdTextBox" Text="{Binding EntradaId}" Width="100" Height="18"/>
+                    <Button x:Name="BuscarButton" Margin="6,0" Click="BuscarButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Buscar.png" Height="20"/>
+                            <Label Content="Buscar"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <!---->
+                <Label Content="Fecha"/>
+                <DatePicker Name="FechaDatePicker"  SelectedDate="{Binding FechaEntrada,StringFormat=dd/MM/yyyy}"   />
+
+                <Label Content="JuegoId:"/>
+                <TextBox x:Name="JuegoIdTextBox" Text="{Binding JuegoId}"/>
+
+                <Label Content="Cantidad:"/>
+                <TextBox x:Name="CantidadTextBox" Text="{Binding Cantidad}"/>
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="32,15">
+                <Button x:Name="NuevoButton" Click="NuevoButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/add.png" Height="20"/>
+                        <Label Content="Nuevo"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="GuardarButton" Margin="15,0" Click="GuardarButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Guardar.png" Height="20"/>
+                        <Label Content="Guardar"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="EliminarButton" Click="EliminarButton_Click" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Eliminar.png" Height="20"/>
+                        <Label Content="Eliminar"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+
     </Grid>
 </Window>

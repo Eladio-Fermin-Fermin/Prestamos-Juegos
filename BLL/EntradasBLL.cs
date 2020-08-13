@@ -59,6 +59,7 @@ namespace PrestamosJuegos.BLL
         //Metodo Guardar.
         public static bool Guardar(Entradas entradas)
         {
+
             if (!Existe(entradas.EntradaId))
                 return Insertar(entradas);
             else
@@ -158,5 +159,25 @@ namespace PrestamosJuegos.BLL
             }
             return Lista;
         }
+
+        public static void IncrementaInventario(Entradas entrada)
+        {
+            Juegos juego = JuegosBLL.Buscar(entrada.JuegoId);
+            juego.Existencia += entrada.Cantidad;
+            JuegosBLL.Guardar(juego);
+        }
+
+        public static void ModificaInventario(Entradas NuevaEntrada)
+        {
+            Entradas entrada = Buscar(NuevaEntrada.EntradaId);//Se buscala entrada anterior
+            Juegos juego = JuegosBLL.Buscar(NuevaEntrada.JuegoId);//Se busca el juego a modificar
+
+            juego.Existencia -= entrada.Cantidad;//Se le resta la cantidad de la entrada anterior.
+            juego.Existencia += NuevaEntrada.Cantidad;//Se le suma la nueva cantidad.
+
+            JuegosBLL.Guardar(juego);
+        }
+
+
     }
 }

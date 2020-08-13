@@ -16,7 +16,7 @@ namespace PrestamosJuegos.Migrations
                     Nombres = table.Column<string>(nullable: true),
                     Direccion = table.Column<string>(nullable: true),
                     Telefono = table.Column<string>(nullable: true),
-                    Cedula = table.Column<string>(nullable: true),
+                    Celular = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     FechaNacimiento = table.Column<DateTime>(nullable: false)
                 },
@@ -70,6 +70,12 @@ namespace PrestamosJuegos.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Prestamos", x => x.PrestamoId);
+                    table.ForeignKey(
+                        name: "FK_Prestamos_Amigos_AmigoId",
+                        column: x => x.AmigoId,
+                        principalTable: "Amigos",
+                        principalColumn: "AmigoId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,12 +92,28 @@ namespace PrestamosJuegos.Migrations
                 {
                     table.PrimaryKey("PK_PrestamosDetalle", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_PrestamosDetalle_Juegos_JuegoId",
+                        column: x => x.JuegoId,
+                        principalTable: "Juegos",
+                        principalColumn: "JuegoId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_PrestamosDetalle_Prestamos_PrestamoId",
                         column: x => x.PrestamoId,
                         principalTable: "Prestamos",
                         principalColumn: "PrestamoId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Prestamos_AmigoId",
+                table: "Prestamos",
+                column: "AmigoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PrestamosDetalle_JuegoId",
+                table: "PrestamosDetalle",
+                column: "JuegoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PrestamosDetalle_PrestamoId",
@@ -102,19 +124,19 @@ namespace PrestamosJuegos.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Amigos");
-
-            migrationBuilder.DropTable(
                 name: "Entradas");
-
-            migrationBuilder.DropTable(
-                name: "Juegos");
 
             migrationBuilder.DropTable(
                 name: "PrestamosDetalle");
 
             migrationBuilder.DropTable(
+                name: "Juegos");
+
+            migrationBuilder.DropTable(
                 name: "Prestamos");
+
+            migrationBuilder.DropTable(
+                name: "Amigos");
         }
     }
 }

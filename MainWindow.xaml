@@ -34,6 +34,12 @@
                         </MenuItem.Icon>-->
                     </MenuItem>
 
+                    <MenuItem x:Name="EntradasMenuItem" Header="Entradas" Click="EntradasMenuItem_Click">
+                        <!-- <MenuItem.Icon>
+                            <Image Source="/Resources/Venta.png"/>
+                        </MenuItem.Icon>-->
+                    </MenuItem>
+
                 </MenuItem>
 
                 <!--Consultas-->
@@ -46,6 +52,7 @@
                     <MenuItem Name="AmigoMenuItem" Header="Consulta Amigos" Click="AmigoMenuItem_Click"/>
                     <MenuItem Name="JuegoMenuItem" Header="Consulta Juegos" Click="JuegoMenuItem_Click"/>
                     <MenuItem Name="PrestamoMenuItem" Header="Consulta Prestamos" Click="PrestamoMenuItem_Click"/>
+                    <MenuItem Name="EntradaMenuItem" Header="Consulta Entradas" Click="EntradaMenuItem_Click"/>
 
                 </MenuItem>
 

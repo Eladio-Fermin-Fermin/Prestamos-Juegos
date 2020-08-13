@@ -33,6 +33,73 @@ namespace PrestamosJuegos.BLL
 
             return encontrado;
         }
+        //Duplicados.
+        public static bool ExisteEmail(string email)
+        {
+            Contexto contexto = new Contexto();
+            bool ok;
+
+            try
+            {
+                ok = contexto.Amigos.Any(a => a.Email.Equals(email));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+
+            return ok;
+        }
+
+        public static bool ExisteCelular(string celular)
+        {
+            Contexto contexto = new Contexto();
+            bool ok;
+
+            try
+            {
+                ok = contexto.Amigos.Any(a => a.Celular.Equals(celular));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+
+            return ok;
+        }
+
+        public static bool ExisteTelefono(string telefono)
+        {
+            Contexto contexto = new Contexto();
+            bool ok;
+
+            try
+            {
+                ok = contexto.Amigos.Any(a => a.Telefono.Equals(telefono));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+
+            return ok;
+        }
+
 
         //Metodo Insertar.
         private static bool Insertar(Amigos amigos)

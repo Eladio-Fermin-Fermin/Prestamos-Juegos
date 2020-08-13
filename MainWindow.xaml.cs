@@ -62,5 +62,17 @@ namespace PrestamosJuegos
             cPrestamos prestamos = new cPrestamos();
             prestamos.Show();
         }
+
+        private void EntradasMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            rEntradas entradas = new rEntradas();
+            entradas.Show();
+        }
+
+        private void EntradaMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            cEntradas centradas = new cEntradas();
+            centradas.Show();
+        }
     }
 }
