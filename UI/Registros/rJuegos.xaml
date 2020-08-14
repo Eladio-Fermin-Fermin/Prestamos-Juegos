@@ -34,7 +34,7 @@
                 <TextBox x:Name="PrecioTextBox" Text="{Binding Precio}"/>
 
                 <Label Content="Existencia:"/>
-                <TextBox x:Name="ExistenciaTextBox" Text="{Binding Existencia}"/>
+                <TextBox x:Name="ExistenciaTextBox" Text="{Binding Existencia}" IsEnabled="False"/>
 
             </StackPanel>
 

@@ -50,42 +50,22 @@ namespace PrestamosJuegos.UI.Registros
         private bool ExisteEnLaBaseDeDatos()
         {
             Prestamos esValido = PrestamosBLL.Buscar(prestamos.PrestamoId);
-
             return (esValido != null);
         }
 
-        private void ObservacionTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        public bool ValidandoAgregar()
         {
-            /*if (ObservacionTextBox.LineCount > previousLineCount)
-            {
-                previousLineCount = ObservacionTextBox.LineCount;
-            }*/
-        }
-
-        public bool ValidarAgregar()
-        {
-            //Valida que se haya seleccionado un juego
             if (JuegoIdComboBox.SelectedIndex == -1)
             {
-                MessageBox.Show("Asegúrese de haber seleccionado un juego.",
+                MessageBox.Show("No a seleccionado un juego por favor seleccione un juego.",
                    "Campo Juego", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
-            //Valida que se introduzaca una cantidad valida.
             if (!Regex.IsMatch(CantidadTextBox.Text, "^[1-9]+${1,9}"))
             {
-                MessageBox.Show("Asegúrese de haber ingresado cantidad valida.",
+                MessageBox.Show("Esta cantidad no es validad.",
                     "Cantidad no valido", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-
-            //Valida que la cantidad no sea mayor que la cantidad existente
-            if (JuegosBLL.Existencia(int.Parse(JuegoIdComboBox.SelectedValue.ToString())) < int.Parse(CantidadTextBox.Text))
-            {
-                MessageBox.Show($"En el inventario solo quedan {JuegosBLL.Existencia(int.Parse(JuegoIdComboBox.SelectedValue.ToString()))} " +
-                    $"unidades disponibles.",
-                    "Cantidad insuficiente.", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
 
@@ -94,18 +74,16 @@ namespace PrestamosJuegos.UI.Registros
 
         public bool Validar()
         {
-            //Valida el Id
             if (!Regex.IsMatch(PrestamoIdTextBox.Text, "^[1-9]+$"))
             {
-                MessageBox.Show("Asegúrese de haber ingresado un Id de caracter numerico y que sea mayor a 0.",
+                MessageBox.Show("Este Id no es valido.",
                     "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
-            //Valida que se seleccione un amigo
             if (AmigoIdComboBox.SelectedIndex == -1)
             {
-                MessageBox.Show("Asegúrese de haber seleccionado un amigo.",
+                MessageBox.Show("Seleccione un amigo.",
                    "Campo Amigo", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
@@ -117,7 +95,7 @@ namespace PrestamosJuegos.UI.Registros
         {
             if (!Regex.IsMatch(PrestamoIdTextBox.Text, "^[1-9]+$"))
             {
-                MessageBox.Show("Asegúrese de haber ingresado un Id de caracter numerico y que sea mayor a 0.",
+                MessageBox.Show("Este Id no es valido..",
                     "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
@@ -130,14 +108,13 @@ namespace PrestamosJuegos.UI.Registros
             }
             else
             {
-                MessageBox.Show("Ese prestamo no existe en la base de datos.", "No se encontro.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("El prestamo no existe.", "No se encontro.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void AgregarButton_Click(object sender, RoutedEventArgs e)
         {
-
-            if (!ValidarAgregar())
+            if (!ValidandoAgregar())
                 return;
 
             var detalle = new PrestamosDetalle
@@ -149,11 +126,7 @@ namespace PrestamosJuegos.UI.Registros
             };
 
             detalle.Juego = (Juegos)JuegoIdComboBox.SelectedItem;
-
             prestamos.PrestamosDetalles.Add(detalle);
-
-            prestamos.CantidadJuegos += int.Parse(CantidadTextBox.Text);
-
             Cargar();
             CantidadTextBox.Clear();
 
@@ -162,7 +135,6 @@ namespace PrestamosJuegos.UI.Registros
         private void RemoverButton_Click(object sender, RoutedEventArgs e)
         {
             var detalle = (PrestamosDetalle)DetalleDataGrid.SelectedItem;
-            prestamos.CantidadJuegos -= detalle.Cantidad;
             prestamos.PrestamosDetalles.RemoveAt(DetalleDataGrid.SelectedIndex);
             Cargar();
         }
@@ -180,11 +152,11 @@ namespace PrestamosJuegos.UI.Registros
             if (PrestamosBLL.Guardar(prestamos))
             {
                 Limpiar();
-                MessageBox.Show("Guardado.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Se a Guardado.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No se pudo Guardar Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -192,7 +164,7 @@ namespace PrestamosJuegos.UI.Registros
         {
             if (!Regex.IsMatch(PrestamoIdTextBox.Text, "^[1-9]+$"))
             {
-                MessageBox.Show("Asegúrese de haber ingresado un Id de caracter numerico y que sea mayor a 0.",
+                MessageBox.Show("El Id no es valido.",
                     "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
@@ -200,11 +172,11 @@ namespace PrestamosJuegos.UI.Registros
             if (PrestamosBLL.Eliminar(int.Parse(PrestamoIdTextBox.Text)))
             {
                 Limpiar();
-                MessageBox.Show("Eliminado.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Se a Eliminado el Registro.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No se pudo Emilinar el Registro Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

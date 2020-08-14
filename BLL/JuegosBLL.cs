@@ -32,11 +32,31 @@ namespace PrestamosJuegos.BLL
 
             return encontrado;
         }
-        //
-        public static int Existencia(int id)
+
+        //Metodo Validar Existencia del Juego mediante la descripcion.
+        public static Juegos ValidaExistenciaJuego(string descripcion)
         {
-            Juegos juego = Buscar(id);
-            return juego.Existencia;
+            Contexto contexto = new Contexto();
+            List<Juegos> lista = new List<Juegos>();
+            Juegos juego;
+
+            try
+            {
+                lista = contexto.Juegos.ToList();
+                juego = lista.Find(j => j.Descripcion == descripcion);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+
+            return juego;
         }
 
         //Metodo Insertar.
@@ -181,31 +201,6 @@ namespace PrestamosJuegos.BLL
                 contexto.Dispose();
             }
             return Lista;
-        }
-
-        public static Juegos ExisteJuego(string descripcion)
-        {
-            Contexto contexto = new Contexto();
-            List<Juegos> lista = new List<Juegos>();
-            Juegos juego;
-
-            try
-            {
-                lista = contexto.Juegos.ToList();
-                juego = lista.Find(j => j.Descripcion == descripcion);
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
-                contexto.Dispose();
-            }
-
-            return juego;
         }
     }
 }

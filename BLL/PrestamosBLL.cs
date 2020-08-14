@@ -11,7 +11,6 @@ namespace PrestamosJuegos.BLL
 {
     public class PrestamosBLL
     {
-
         //Metodo Existe.
         public static bool Existe(int id)
         {
@@ -132,12 +131,11 @@ namespace PrestamosJuegos.BLL
 
             try
             {
-                //buscar la entidad que se desea eliminar
                 var prestamos = PrestamosBLL.Buscar(id);
 
                 if (prestamos != null)
                 {
-                    contexto.Prestamos.Remove(prestamos); //remover la entidad
+                    contexto.Prestamos.Remove(prestamos);
                     paso = contexto.SaveChanges() > 0;
                 }
             }
@@ -160,7 +158,6 @@ namespace PrestamosJuegos.BLL
 
             try
             {
-                //obtener la lista y filtrarla según el criterio recibido por parametro.
                 Lista = contexto.Prestamos.Where(criterio).ToList();
             }
             catch (Exception)
@@ -173,6 +170,5 @@ namespace PrestamosJuegos.BLL
             }
             return Lista;
         }
-
     }
 }

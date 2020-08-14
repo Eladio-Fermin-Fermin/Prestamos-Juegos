@@ -150,7 +150,6 @@ namespace PrestamosJuegos.BLL
 
             try
             {
-                //obtener la lista y filtrarla según el criterio recibido por parametro.
                 Lista = contexto.Entradas.Where(criterio).ToList();
             }
             catch (Exception)
@@ -162,35 +161,6 @@ namespace PrestamosJuegos.BLL
                 contexto.Dispose();
             }
             return Lista;
-        }
-
-        public static void IncrementaInventario(Entradas entrada)
-        {
-            Juegos juego = JuegosBLL.Buscar(entrada.JuegoId);
-            juego.Existencia += entrada.Cantidad;
-            JuegosBLL.Guardar(juego);
-        }
-
-        public static bool ModificaInventario(Entradas NuevaEntrada)
-        {
-            Entradas entrada = Buscar(NuevaEntrada.EntradaId);//Se buscala entrada anterior
-            Juegos juego = JuegosBLL.Buscar(NuevaEntrada.JuegoId);//Se busca el juego a modificar
-
-            juego.Existencia -= entrada.Cantidad;//Se le resta la cantidad de la entrada anterior.
-            juego.Existencia += NuevaEntrada.Cantidad;//Se le suma la nueva cantidad.
-
-            //Se puede dar el caso de que se preste una una cantidad X de juegos y se quiera modificar 
-            //la entrada por una cantidad menor a la que se presto y el inventario quede en - 
-            if (juego.Existencia < 0)
-            {
-                MessageBox.Show("No puedes realizar este cambio porque al parecer prestaste una cantidad mayor de la que ahora quieres " +
-                    "ingresar.",
-                    "Ha ocurrido un conflicto.", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-
-            JuegosBLL.Guardar(juego);
-            return true;
         }
     }
 }

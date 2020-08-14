@@ -33,43 +33,45 @@ namespace PrestamosJuegos.UI.Registros
             this.DataContext = juegos;
         }
 
-        public bool Validar()
+        //Metodo validar
+        public bool esValido()
         {
             if (!Regex.IsMatch(JuegoIdTextBox.Text, "^[1-9]+$"))
             {
-                MessageBox.Show("Asegúrese de haber ingresado un Id de caracter numerico y que sea mayor a 0.",
+                MessageBox.Show("Este Id no es Valido.",
                     "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
             if (DescripcionTextBox.Text.Length == 0 || PrecioTextBox.Text.Length == 0)
             {
-                MessageBox.Show("Asegúrese de haber llenado todos los campos.", "Campos vacíos",
+                MessageBox.Show("Existen Campos vacíos.", "Campos vacíos",
                     MessageBoxButton.OK, MessageBoxImage.Information);
                 return false;
             }
 
-            if (!Regex.IsMatch(PrecioTextBox.Text, @"^[0-9]{1,8}$|^[0-9]{1,8}\.[0-9]{1,8}$"))
-            {
-                MessageBox.Show("Solo puede introducir carácteres numéricos.", "Campo Precio.",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-
-            var juego = JuegosBLL.ExisteJuego(DescripcionTextBox.Text);
+            var juego = JuegosBLL.ValidaExistenciaJuego(DescripcionTextBox.Text);
             if (juego != null)
             {
                 if ((DescripcionTextBox.Text == juego.Descripcion) && (int.Parse(JuegoIdTextBox.Text) != juego.JuegoId))
                 {
-                    MessageBox.Show($"Este juego ya existe con el Id: {juego.JuegoId}.", "Ya Existente.",
-                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show($"Hay conflictos con registros existentes en la base de datos: {juego.JuegoId}.",
+                        "Ya Existente.", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
             }
 
+            if (!Regex.IsMatch(PrecioTextBox.Text, @"^[0-9]{1,8}$|^[0-9]{1,8}\.[0-9]{1,8}$"))
+            {
+                MessageBox.Show("Solo carácteres numéricos Mayor que 0.", 
+                    "Campo Precio.", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
             return true;
         }
 
+        //private
+        //
 
         private void BuscarButton_Click(object sender, RoutedEventArgs e)
         {
@@ -88,7 +90,7 @@ namespace PrestamosJuegos.UI.Registros
             }
             else
             {
-                MessageBox.Show("No se encontro el juego en la base de datos.", "No se encontro.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No se encontro el juego.", "No se encontro.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -100,7 +102,7 @@ namespace PrestamosJuegos.UI.Registros
         private void GuardarButton_Click(object sender, RoutedEventArgs e)
         {
 
-            if (!Validar())
+            if (!esValido())
                 return;
 
             if (JuegosBLL.Guardar(juegos))
@@ -126,11 +128,11 @@ namespace PrestamosJuegos.UI.Registros
             if (JuegosBLL.Eliminar(int.Parse(JuegoIdTextBox.Text)))
             {
                 Limpiar();
-                MessageBox.Show("Eliminado.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Se Elimino el Registro.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("No se pudo Eliminal Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No se pudo Eliminar este Registro Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

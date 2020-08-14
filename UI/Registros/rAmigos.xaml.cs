@@ -45,7 +45,7 @@ namespace PrestamosJuegos.UI.Registros
             if (NombresTextBox.Text.Length == 0 || EmailTextBox.Text.Length == 0 || CelularTextBox.Text.Length == 0 ||
                 DireccionTextBox.Text.Length == 0)
             {
-                MessageBox.Show("Asegúrese de haber llenado todos los campos.", "Campos vacíos",
+                MessageBox.Show("Existen Campos vacíos..", "Campos vacíos",
                     MessageBoxButton.OK, MessageBoxImage.Information);
                 return false;
             }
@@ -57,45 +57,28 @@ namespace PrestamosJuegos.UI.Registros
                 return false;
             }
 
-            DateTime fechaActual = DateTime.Now;
-            DateTime fechaNacimiento = FechaNacimientoDatePicker.SelectedDate.Value;
-            TimeSpan ts = fechaActual - fechaNacimiento;
-            int edad = (int)ts.TotalDays;
-            if (edad < 2555 || edad == 0)
-            {
-                MessageBox.Show("Muy joven.", $"Ahora no Joven {edad / 365} años.",
-                      MessageBoxButton.OK, MessageBoxImage.Information);
-                return false;
-            }
-            /*else if (edad > 47450)
-            {
-                MessageBox.Show("La persona a la que intentas registras tiene unas muy alta probabilades de haber fallecido.", $"Esta persona tine {edad / 365} años.",
-                      MessageBoxButton.OK, MessageBoxImage.Information);
-                return false;
-            }*/
-
             if (!Regex.IsMatch(EmailTextBox.Text, "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*"))
             {
-                MessageBox.Show("El correo electrónico no es válida.", "Campo Email.",
+                MessageBox.Show("Este correo electrónico no es válida.", "Campo Email.",
                    MessageBoxButton.OK, MessageBoxImage.Information);
                 return false;
             }
 
             if (TelefonoTextBox.Text.Length != 0 && !Regex.IsMatch(TelefonoTextBox.Text, @"\d{3}\-\d{3}\-\d{4}"))
             {
-                MessageBox.Show("Formato: 809-000-0102.", "Número Teléfono no válido.",
+                MessageBox.Show("No tiene el Formato: 809-000-0102.", "Número Teléfono no válido.",
                   MessageBoxButton.OK, MessageBoxImage.Information);
                 return false;
             }
 
             if (!Regex.IsMatch(CelularTextBox.Text, @"\d{3}\-\d{3}\-\d{4}"))
             {
-                MessageBox.Show("Formato: 829-050-0607.", "Número celular no válido.",
+                MessageBox.Show("No tiene el Formato: 829-050-0607.", "Número celular no válido.",
                   MessageBoxButton.OK, MessageBoxImage.Information);
                 return false;
             }
 
-            
+            //Metodo Para los Duplicado.
             var amigo = AmigosBLL.Buscar(int.Parse(AmigoIdTextBox.Text));
             if (amigo != null)
             {
@@ -133,14 +116,14 @@ namespace PrestamosJuegos.UI.Registros
             {
                 if (AmigosBLL.ExisteEmail(EmailTextBox.Text) && amigo.Nombres != NombresTextBox.Text)
                 {
-                    MessageBox.Show("Correo electrónico no esta disponible.", $"El Email \"{EmailTextBox.Text}\" Ya Existe.",
+                    MessageBox.Show("Este Correo electrónico no esta disponible.", $"El Email \"{EmailTextBox.Text}\" Ya Existe.",
                         MessageBoxButton.OK, MessageBoxImage.Information);
                     return false;
                 }
             }
             else if (AmigosBLL.ExisteEmail(EmailTextBox.Text))
             {
-                MessageBox.Show("El Correo electrónico no esta disponible.", $"El Email \"{EmailTextBox.Text}\" Ya Existe.",
+                MessageBox.Show("Este Correo electrónico no esta disponible.", $"El Email \"{EmailTextBox.Text}\" Ya Existe.",
                         MessageBoxButton.OK, MessageBoxImage.Information);
                 return false;
             }
@@ -164,7 +147,7 @@ namespace PrestamosJuegos.UI.Registros
             }
             else
             {
-                MessageBox.Show("No existe en la base de datos.", "No se encontro.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("El Amigo No existe.", "No se encontro.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -186,7 +169,7 @@ namespace PrestamosJuegos.UI.Registros
             }
             else
             {
-                MessageBox.Show("No se Guardado Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No se Guardo Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -204,11 +187,11 @@ namespace PrestamosJuegos.UI.Registros
             if (AmigosBLL.Eliminar(int.Parse(AmigoIdTextBox.Text)))
             {
                 Limpiar();
-                MessageBox.Show("Eliminado.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Se Elimino el Registro.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("No se pudo Eliminal Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No se pudo Eliminar este registro Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }

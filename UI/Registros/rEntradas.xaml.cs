@@ -39,10 +39,34 @@ namespace PrestamosJuegos.UI.Registros
             this.DataContext = entradas;
         }
 
-        /*public bool Validar()
+        private bool Validar()
         {
+            bool esValido = true;
+
+            if (EntradaIdTextBox.Text.Length == 0)
+            {
+                esValido = false;
+                GuardarButton.IsEnabled = false;
+                MessageBox.Show("EntradaId está vacio", "Fallo",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                EntradaIdTextBox.Focus();
+                GuardarButton.IsEnabled = true;
+            }
+
+            if (CantidadTextBox.Text.Length == 0)
+            {
+                esValido = false;
+                GuardarButton.IsEnabled = false;
+                MessageBox.Show("Cantidad está vacio", "Fallo",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                CantidadTextBox.Focus();
+                GuardarButton.IsEnabled = true;
+            }
+
             
-        }*/
+
+            return esValido;
+        }
 
         private void BuscarButton_Click(object sender, RoutedEventArgs e)
         {
@@ -61,7 +85,7 @@ namespace PrestamosJuegos.UI.Registros
             }
             else
             {
-                MessageBox.Show("No Existe en la base de datos.", "No se encontro.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("El conteo de registros no es válido.", "No se encontro.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -78,11 +102,11 @@ namespace PrestamosJuegos.UI.Registros
             if (EntradasBLL.Guardar(entradas))
             {
                 Limpiar();
-                MessageBox.Show("Guardado.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Se a Guardado.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No se Guardo Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -98,11 +122,11 @@ namespace PrestamosJuegos.UI.Registros
             if (EntradasBLL.Eliminar(int.Parse(EntradaIdTextBox.Text)))
             {
                 Limpiar();
-                MessageBox.Show("Eliminado.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Se Elimino el Registro", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No se pudo Eliminar este registro Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
