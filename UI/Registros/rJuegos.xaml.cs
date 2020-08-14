@@ -35,7 +35,6 @@ namespace PrestamosJuegos.UI.Registros
 
         public bool Validar()
         {
-            //Valida el Id
             if (!Regex.IsMatch(JuegoIdTextBox.Text, "^[1-9]+$"))
             {
                 MessageBox.Show("Asegúrese de haber ingresado un Id de caracter numerico y que sea mayor a 0.",
@@ -43,7 +42,6 @@ namespace PrestamosJuegos.UI.Registros
                 return false;
             }
 
-            //válida que no hayan campos vacíos.
             if (DescripcionTextBox.Text.Length == 0 || PrecioTextBox.Text.Length == 0)
             {
                 MessageBox.Show("Asegúrese de haber llenado todos los campos.", "Campos vacíos",
@@ -51,7 +49,6 @@ namespace PrestamosJuegos.UI.Registros
                 return false;
             }
 
-            //válida que haya un dato válido en el precio.
             if (!Regex.IsMatch(PrecioTextBox.Text, @"^[0-9]{1,8}$|^[0-9]{1,8}\.[0-9]{1,8}$"))
             {
                 MessageBox.Show("Solo puede introducir carácteres numéricos.", "Campo Precio.",
@@ -59,14 +56,12 @@ namespace PrestamosJuegos.UI.Registros
                 return false;
             }
 
-            //Valida que no se creen varios registro del mismo juego
-            //var juego = JuegosBLL.DoplicadoJuego(DescripcionTextBox.Text);
             var juego = JuegosBLL.ExisteJuego(DescripcionTextBox.Text);
             if (juego != null)
             {
                 if ((DescripcionTextBox.Text == juego.Descripcion) && (int.Parse(JuegoIdTextBox.Text) != juego.JuegoId))
                 {
-                    MessageBox.Show($"Este juego ya existe con el Id: {juego.JuegoId}.", "Existente en el inventario.",
+                    MessageBox.Show($"Este juego ya existe con el Id: {juego.JuegoId}.", "Ya Existente.",
                         MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
@@ -80,7 +75,7 @@ namespace PrestamosJuegos.UI.Registros
         {
             if (!Regex.IsMatch(JuegoIdTextBox.Text, "^[1-9]+$"))
             {
-                MessageBox.Show("Asegúrese de haber ingresado un Id de caracter numerico y que sea mayor a 0.",
+                MessageBox.Show("Este Id no es Valido.",
                     "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
@@ -93,7 +88,7 @@ namespace PrestamosJuegos.UI.Registros
             }
             else
             {
-                MessageBox.Show("Ese juego no existe en la base de datos.", "No se encontro.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No se encontro el juego en la base de datos.", "No se encontro.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -115,7 +110,7 @@ namespace PrestamosJuegos.UI.Registros
             }
             else
             {
-                MessageBox.Show("Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No se Guardo Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -123,7 +118,7 @@ namespace PrestamosJuegos.UI.Registros
         {
             if (!Regex.IsMatch(JuegoIdTextBox.Text, "^[1-9]+$"))
             {
-                MessageBox.Show("Asegúrese de haber ingresado un Id de caracter numerico y que sea mayor a 0.",
+                MessageBox.Show("Este Id no es Valido",
                     "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
@@ -135,7 +130,7 @@ namespace PrestamosJuegos.UI.Registros
             }
             else
             {
-                MessageBox.Show("Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No se pudo Eliminal Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
