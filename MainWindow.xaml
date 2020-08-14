@@ -11,11 +11,6 @@
         <StackPanel Grid.ColumnSpan="3">
             <Menu Height="46">
                 <MenuItem Header="   Registros" Width="94"   >
-
-                    <!--<MenuItem.Icon>
-                       <Image Source="/Resources/Registro.png" Margin="-4,-15,-14,-15
-                    </MenuItem.Icon>"/-->
-
                     <MenuItem x:Name="AmigosMenuItem" Header="Amigos" Click="AmigosMenuItem_Click">
                         <MenuItem.Icon>
                             <Image Source="/Resources/amigo.png" />
@@ -57,16 +52,12 @@
                 </MenuItem>
 
                 <MenuItem Header="   Ayuda" Width="72" >
-                   <!-- <MenuItem.Icon>
-                        <Image Source="/Resources/Ayuda.jfif"  Margin="-4,-15,-14,-15"/>
-                    </MenuItem.Icon>-->
-
                     <MenuItem x:Name="InformacionMenuItem" Header="Informacion" />
                 </MenuItem>
             </Menu>
-            <!--<StackPanel Height="360">
-                <Image Width="598" Source="/Resources/Fondo.jfif" Height="451"/>
-            </StackPanel> -->
+            <StackPanel>
+                <Image Width="850" Source="/Resources/Logo.jpg" Height="453"/>
+            </StackPanel>
         </StackPanel>
 
 
