@@ -32,6 +32,12 @@ namespace PrestamosJuegos.BLL
 
             return encontrado;
         }
+        //
+        public static int Existencia(int id)
+        {
+            Juegos juego = Buscar(id);
+            return juego.Existencia;
+        }
 
         //Metodo Insertar.
         private static bool Insertar(Juegos juegos)
@@ -41,7 +47,6 @@ namespace PrestamosJuegos.BLL
 
             try
             {
-                //Agregar la entidad que se desea insertar al contexto
                 contexto.Juegos.Add(juegos);
                 paso = contexto.SaveChanges() > 0;
             }
@@ -94,7 +99,6 @@ namespace PrestamosJuegos.BLL
 
             try
             {
-                //marcar la entidad como modificada para que el contexto sepa como proceder
                 contexto.Entry(juegos).State = EntityState.Modified;
                 paso = contexto.SaveChanges() > 0;
             }
@@ -117,7 +121,6 @@ namespace PrestamosJuegos.BLL
 
             try
             {
-                //buscar la entidad que se desea eliminar
                 var juegos = JuegosBLL.Buscar(id);
 
                 if (juegos != null)
@@ -137,6 +140,28 @@ namespace PrestamosJuegos.BLL
             return paso;
         }
 
+        public static List<Juegos> GetJuegos()
+        {
+            Contexto contexto = new Contexto();
+            List<Juegos> lista = new List<Juegos>();
+
+            try
+            {
+                lista = contexto.Juegos.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+
+            return lista;
+        }
+
         //Metodo GetList.
         public static List<Juegos> GetList(Expression<Func<Juegos, bool>> criterio)
         {
@@ -145,7 +170,6 @@ namespace PrestamosJuegos.BLL
 
             try
             {
-                //obtener la lista y filtrarla según el criterio recibido por parametro.
                 Lista = contexto.Juegos.Where(criterio).ToList();
             }
             catch (Exception)
@@ -159,7 +183,7 @@ namespace PrestamosJuegos.BLL
             return Lista;
         }
 
-        public static Juegos DoplicadoJuego(string descripcion)
+        public static Juegos ExisteJuego(string descripcion)
         {
             Contexto contexto = new Contexto();
             List<Juegos> lista = new List<Juegos>();

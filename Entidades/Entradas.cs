@@ -11,9 +11,8 @@ namespace PrestamosJuegos.Entidades
        [Key]
        public int EntradaId { get; set; }
        public DateTime FechaEntrada { get; set; } = DateTime.Now;
+       public int Cantidad { get; set; }
        public int JuegoId { get; set; }
-        [ForeignKey("JuegoId")]
-        public virtual Juegos Nacionalidad { get; set; }
-        public int Cantidad { get; set; }
+       //[ForeignKey("JuegoId")]
     }
 }

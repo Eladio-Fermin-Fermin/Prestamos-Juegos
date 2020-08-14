@@ -3,6 +3,7 @@ using PrestamosJuegos.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -25,14 +26,15 @@ namespace PrestamosJuegos.UI.Registros
         {
             InitializeComponent();
             this.DataContext = prestamos;
-            var Lista = JuegosBLL.GetList(x => true);
-            this.JuegoIdComboBox.ItemsSource = Lista;
-            this.JuegoIdComboBox.SelectedValuePath = "JuegoId";
-            this.JuegoIdComboBox.DisplayMemberPath = "Descripcion";
-            if (Lista.Count > 0)
-                this.JuegoIdComboBox.SelectedIndex = 0;
-        }
+            JuegoIdComboBox.ItemsSource = JuegosBLL.GetJuegos();
+            JuegoIdComboBox.SelectedValuePath = "JuegoId";
+            JuegoIdComboBox.DisplayMemberPath = "Descripcion";
 
+            AmigoIdComboBox.ItemsSource = AmigosBLL.GetAmigos();
+            AmigoIdComboBox.SelectedValuePath = "AmigoId";
+            AmigoIdComboBox.DisplayMemberPath = "Nombres";
+        }
+        
         private void Cargar()
         {
             this.DataContext = null;
@@ -52,46 +54,117 @@ namespace PrestamosJuegos.UI.Registros
             return (esValido != null);
         }
 
+        private void ObservacionTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            /*if (ObservacionTextBox.LineCount > previousLineCount)
+            {
+                previousLineCount = ObservacionTextBox.LineCount;
+            }*/
+        }
+
+        public bool ValidarAgregar()
+        {
+            //Valida que se haya seleccionado un juego
+            if (JuegoIdComboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("Asegúrese de haber seleccionado un juego.",
+                   "Campo Juego", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            //Valida que se introduzaca una cantidad valida.
+            if (!Regex.IsMatch(CantidadTextBox.Text, "^[1-9]+${1,9}"))
+            {
+                MessageBox.Show("Asegúrese de haber ingresado cantidad valida.",
+                    "Cantidad no valido", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            //Valida que la cantidad no sea mayor que la cantidad existente
+            if (JuegosBLL.Existencia(int.Parse(JuegoIdComboBox.SelectedValue.ToString())) < int.Parse(CantidadTextBox.Text))
+            {
+                MessageBox.Show($"En el inventario solo quedan {JuegosBLL.Existencia(int.Parse(JuegoIdComboBox.SelectedValue.ToString()))} " +
+                    $"unidades disponibles.",
+                    "Cantidad insuficiente.", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool Validar()
+        {
+            //Valida el Id
+            if (!Regex.IsMatch(PrestamoIdTextBox.Text, "^[1-9]+$"))
+            {
+                MessageBox.Show("Asegúrese de haber ingresado un Id de caracter numerico y que sea mayor a 0.",
+                    "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            //Valida que se seleccione un amigo
+            if (AmigoIdComboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("Asegúrese de haber seleccionado un amigo.",
+                   "Campo Amigo", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            return true;
+        }
+
         private void BucarButton_Click(object sender, RoutedEventArgs e)
         {
-            Prestamos encontrado = PrestamosBLL.Buscar(prestamos.PrestamoId);
+            if (!Regex.IsMatch(PrestamoIdTextBox.Text, "^[1-9]+$"))
+            {
+                MessageBox.Show("Asegúrese de haber ingresado un Id de caracter numerico y que sea mayor a 0.",
+                    "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
+            var encontrado = PrestamosBLL.Buscar(int.Parse(PrestamoIdTextBox.Text));
             if (encontrado != null)
             {
                 prestamos = encontrado;
-                Cargar();
+                this.DataContext = prestamos;
             }
             else
             {
-                Limpiar();
-                MessageBox.Show("Tarea no existe en la base de datos", "Fallo", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ese prestamo no existe en la base de datos.", "No se encontro.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void AgregarButton_Click(object sender, RoutedEventArgs e)
         {
-            var Detalle = new PrestamosDetalle
+
+            if (!ValidarAgregar())
+                return;
+
+            var detalle = new PrestamosDetalle
             {
-                PrestamoId = this.prestamos.PrestamoId, 
-                JuegoId = Convert.ToInt32(JuegoIdComboBox.SelectedValue.ToString()),
-                Cantidad = Convert.ToInt32(CantidadTextBox.Text)
+                Id = 0,
+                PrestamoId = int.Parse(PrestamoIdTextBox.Text),
+                JuegoId = int.Parse(JuegoIdComboBox.SelectedValue.ToString()),
+                Cantidad = int.Parse(CantidadTextBox.Text)
             };
 
-            //this.
-            Cargar();
+            detalle.Juego = (Juegos)JuegoIdComboBox.SelectedItem;
 
-            JuegoIdComboBox.SelectedIndex = -1;
+            prestamos.PrestamosDetalles.Add(detalle);
+
+            prestamos.CantidadJuegos += int.Parse(CantidadTextBox.Text);
+
+            Cargar();
             CantidadTextBox.Clear();
 
         }
 
         private void RemoverButton_Click(object sender, RoutedEventArgs e)
         {
-            if (DetalleDataGrid.Items.Count >= 1 && DetalleDataGrid.SelectedIndex <= DetalleDataGrid.Items.Count - 1)
-            {
-                prestamos.Detalles.RemoveAt(DetalleDataGrid.SelectedIndex);
-                Cargar();
-            }
+            var detalle = (PrestamosDetalle)DetalleDataGrid.SelectedItem;
+            prestamos.CantidadJuegos -= detalle.Cantidad;
+            prestamos.PrestamosDetalles.RemoveAt(DetalleDataGrid.SelectedIndex);
+            Cargar();
         }
 
         private void NuevoButton_Click(object sender, RoutedEventArgs e)
@@ -101,47 +174,37 @@ namespace PrestamosJuegos.UI.Registros
 
         private void GuardarButton_Click(object sender, RoutedEventArgs e)
         {
-            bool paso = false;
+            if (!Validar())
+                return;
 
-            if (prestamos.PrestamoId == 0)
-            {
-                paso = PrestamosBLL.Guardar(prestamos);
-            }
-            else
-            {
-                if (ExisteEnLaBaseDeDatos())
-                {
-                    paso = PrestamosBLL.Guardar(prestamos);
-                }
-                else
-                {
-                    MessageBox.Show("No existe en la base de datos", "ERROR");
-                }
-            }
-
-            if (paso)
+            if (PrestamosBLL.Guardar(prestamos))
             {
                 Limpiar();
-                MessageBox.Show("Guardado!", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Guardado.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
-                MessageBox.Show("Fallo al guardar", "Fallo", MessageBoxButton.OK, MessageBoxImage.Error);
+            {
+                MessageBox.Show("Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void EliminarButton_Click(object sender, RoutedEventArgs e)
         {
-            Prestamos existe = PrestamosBLL.Buscar(prestamos.PrestamoId);
-
-            if (existe == null)
+            if (!Regex.IsMatch(PrestamoIdTextBox.Text, "^[1-9]+$"))
             {
-                MessageBox.Show("No existe la tarea en la base de datos", "Fallo", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Asegúrese de haber ingresado un Id de caracter numerico y que sea mayor a 0.",
+                    "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
+            }
+
+            if (PrestamosBLL.Eliminar(int.Parse(PrestamoIdTextBox.Text)))
+            {
+                Limpiar();
+                MessageBox.Show("Eliminado.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                PrestamosBLL.Eliminar(prestamos.PrestamoId);
-                MessageBox.Show("Eliminado", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
-                Limpiar();
+                MessageBox.Show("Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

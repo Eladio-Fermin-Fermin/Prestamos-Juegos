@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrestamosJuegos.UI.Registros"
         mc:Ignorable="d"
-        Title="Registro Entradas" Height="293" Width="324">
+        Icon="/Resources/entrada.png"
+        Title="Registro Entradas" Height="293" Width="350">
     <Grid>
 
         <StackPanel Orientation="Vertical" Margin="4,0,4,0">

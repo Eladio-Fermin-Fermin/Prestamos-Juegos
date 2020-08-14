@@ -5,15 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrestamosJuegos.UI.Registros"
         mc:Ignorable="d"
-        Title="Registro Prestamos" Height="490" Width="700">
+        Icon="/Resources/prestamo.png"
+        Title="Registro Prestamos" Height="528" Width="700">
     <Grid>
 
         <StackPanel Orientation="Vertical" >
             <Label Content="Prestamo Id" />
 
-            <!--OrdenIdTextBox y BuscarButton-->
-            <!--Button-->
-            <!--"BucarButton_Click"-->
             <StackPanel Orientation="Horizontal" >
 
                 <TextBox x:Name="PrestamoIdTextBox" Width="150" Text="{Binding PrestamoId}" Height="22"/>
@@ -34,18 +32,24 @@
 
             <StackPanel Orientation="Vertical" >
                 <Label Content="Amigo Id" />
-                <TextBox Name="ClienteIdTextBox" Text="{Binding AmigoId}"  />
+                <ComboBox Name="AmigoIdComboBox" SelectedValue="{Binding AmigoId}" Margin="0,0" Cursor=""/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Observación (Opcional):" />
+                <TextBox x:Name="ObservacionTextBox" Width="349" Text="{Binding PrestamoId}" Height="22"/>
+                <Label Content="CantidadJuegos"/>
+                <TextBox x:Name="CantidadJuegosTextBox" Text="{Binding CantidadJuegos}" Height="22" Width="75"/>
+                
             </StackPanel>
 
 
-            <GroupBox Header="Prestamo Detalle" BorderBrush="#FF414649"   >
+            <GroupBox Header="Prestamo Detalle" BorderBrush="#FF414649">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal" >
 
                         <Label Content="Juego Id" />
-                        <ComboBox x:Name="JuegoIdComboBox" SelectedValue="{Binding JuegoId}" Width="45"/>
-                        <Label Content="Descripcion" FontSize="14" Margin="25,0,0,0" Width="81"/>
-                        <TextBox x:Name="DescripcionTextBox" Text="{Binding Descripcion}" Width="104" />
+                        <ComboBox x:Name="JuegoIdComboBox" SelectedValue="{Binding JuegoId}" Width="108"/>
                         <Label Content="Cantidad" FontSize="14" Margin="0,0,0,0"/>
                         <TextBox x:Name="CantidadTextBox" Text="{Binding Cantidad}" Width="80" />
 
@@ -64,13 +68,15 @@
                         </Button>
 
                     </StackPanel>
-                    <DataGrid x:Name="DetalleDataGrid" ItemsSource="{Binding Detalle}" AlternatingRowBackground="#FFBAE3FF" AutoGenerateColumns="False" Margin="0,5,0,0" Width="675"  Height="189">
+                    <DataGrid x:Name="DetalleDataGrid" ItemsSource="{Binding PrestamosDetalles}" AlternatingRowBackground="#FFBAE3FF" AutoGenerateColumns="False" Margin="0,5,0,0" Width="500"  Height="189">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id"  Binding="{Binding Id}"/>
                             <DataGridTextColumn Header="Cantidad"  Binding="{Binding Cantidad}"/>
                             <DataGridTextColumn Header="Descripción"  Binding="{Binding Descripcion}"/>
                             <DataGridTextColumn Header="JuegoId"  Binding="{Binding JuegoId}"/>
+                            <DataGridTextColumn Header="Precio"  Binding="{Binding Precio}"/>
+                            
                         </DataGrid.Columns>
                     </DataGrid>
 

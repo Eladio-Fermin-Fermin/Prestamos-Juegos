@@ -60,7 +60,8 @@ namespace PrestamosJuegos.UI.Registros
             }
 
             //Valida que no se creen varios registro del mismo juego
-            var juego = JuegosBLL.DoplicadoJuego(DescripcionTextBox.Text);
+            //var juego = JuegosBLL.DoplicadoJuego(DescripcionTextBox.Text);
+            var juego = JuegosBLL.ExisteJuego(DescripcionTextBox.Text);
             if (juego != null)
             {
                 if ((DescripcionTextBox.Text == juego.Descripcion) && (int.Parse(JuegoIdTextBox.Text) != juego.JuegoId))

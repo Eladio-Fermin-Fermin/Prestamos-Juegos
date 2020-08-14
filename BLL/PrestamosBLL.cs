@@ -42,7 +42,7 @@ namespace PrestamosJuegos.BLL
 
             try
             {
-                foreach(var item in prestamos.Detalles)
+                foreach(var item in prestamos.PrestamosDetalles)
                 {
                     item.Juego.Existencia -= item.Cantidad;
                     contexto.Entry(item.Juego).State = EntityState.Modified;
@@ -79,7 +79,7 @@ namespace PrestamosJuegos.BLL
 
             try
             {
-                prestamo = contexto.Prestamos.Where(p => p.PrestamoId == id).Include(p => p.Detalles)
+                prestamo = contexto.Prestamos.Where(p => p.PrestamoId == id).Include(p => p.PrestamosDetalles)
                     .ThenInclude(d => d.Juego).SingleOrDefault();
             }
             catch (Exception)
@@ -103,7 +103,7 @@ namespace PrestamosJuegos.BLL
             try
             {
                 contexto.Database.ExecuteSqlRaw($"Delete FROM PrestamoDetalle Where PrestamoId={prestamo.PrestamoId}");
-                foreach (var item in prestamo.Detalles)
+                foreach (var item in prestamo.PrestamosDetalles)
                 {
                     contexto.Entry(item).State = EntityState.Added;
                 }

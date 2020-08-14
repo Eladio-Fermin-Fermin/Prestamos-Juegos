@@ -16,14 +16,15 @@ namespace PrestamosJuegos.BLL
         public static bool Existe(int id)
         {
             Contexto contexto = new Contexto();
-            bool encontrado = false;
+            bool ok = false;
 
             try
             {
-                encontrado = contexto.Amigos.Any(e => e.AmigoId == id);
+                ok = contexto.Amigos.Any(a => a.AmigoId == id);
             }
             catch (Exception)
             {
+
                 throw;
             }
             finally
@@ -31,8 +32,9 @@ namespace PrestamosJuegos.BLL
                 contexto.Dispose();
             }
 
-            return encontrado;
+            return ok;
         }
+
         //Duplicados.
         public static bool ExisteEmail(string email)
         {
@@ -102,26 +104,27 @@ namespace PrestamosJuegos.BLL
 
 
         //Metodo Insertar.
-        private static bool Insertar(Amigos amigos)
+        private static bool Insertar(Amigos amigo)
         {
-            bool paso = false;
             Contexto contexto = new Contexto();
+            bool ok = false;
 
             try
             {
-                //Agregar la entidad que se desea insertar al contexto
-                contexto.Amigos.Add(amigos);
-                paso = contexto.SaveChanges() > 0;
+                contexto.Amigos.Add(amigo);
+                ok = contexto.SaveChanges() > 0;
             }
             catch (Exception)
             {
+
                 throw;
             }
             finally
             {
                 contexto.Dispose();
             }
-            return paso;
+
+            return ok;
         }
 
         //Metodo Guardar.
@@ -162,7 +165,6 @@ namespace PrestamosJuegos.BLL
 
             try
             {
-                //marcar la entidad como modificada para que el contexto sepa como proceder
                 contexto.Entry(amigos).State = EntityState.Modified;
                 paso = contexto.SaveChanges() > 0;
             }
@@ -185,12 +187,11 @@ namespace PrestamosJuegos.BLL
 
             try
             {
-                //buscar la entidad que se desea eliminar
                 var amigos = AmigosBLL.Buscar(id);
 
                 if (amigos != null)
                 {
-                    contexto.Amigos.Remove(amigos); //remover la entidad
+                    contexto.Amigos.Remove(amigos);
                     paso = contexto.SaveChanges() > 0;
                 }
             }
@@ -204,6 +205,30 @@ namespace PrestamosJuegos.BLL
             }
             return paso;
         }
+
+        //Metodo
+        public static List<Amigos> GetAmigos()
+        {
+            Contexto contexto = new Contexto();
+            List<Amigos> lista = new List<Amigos>();
+
+            try
+            {
+                lista = contexto.Amigos.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+
+            return lista;
+        }
+
 
         //Metodo GetList.
         public static List<Amigos> GetList(Expression<Func<Amigos, bool>> criterio)

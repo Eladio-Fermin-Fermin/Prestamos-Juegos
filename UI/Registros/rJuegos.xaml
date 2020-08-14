@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrestamosJuegos.UI.Registros"
         mc:Ignorable="d"
+        Icon="/Resources/gamer.png"
         Title="Registro Juegos" Height="335" Width="300">
     <Grid>
 
