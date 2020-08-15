@@ -62,44 +62,43 @@ namespace PrestamosJuegos.UI.Registros
                 return false;
             }
 
-            if (!Regex.IsMatch(CantidadTextBox.Text, "^[1-9]+${1,9}"))
+           /* if (!Regex.IsMatch(CantidadTextBox.Text, "^[1-9]+${1,9}"))
             {
                 MessageBox.Show("Esta cantidad no es validad.",
                     "Cantidad no valido", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
-            }
+            }*/
 
             return true;
         }
 
         public bool Validar()
         {
-            if (!Regex.IsMatch(PrestamoIdTextBox.Text, "^[1-9]+$"))
+            bool esValido = true;
+            if (PrestamoIdTextBox.Text.Length == 0)
             {
-                MessageBox.Show("Este Id no es valido.",
-                    "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
+                esValido = false;
+                GuardarButton.IsEnabled = false;
+                MessageBox.Show("PrestamoId está vacio", "Fallo",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                PrestamoIdTextBox.Focus();
+                GuardarButton.IsEnabled = true;
             }
 
-            if (AmigoIdComboBox.SelectedIndex == -1)
+            /*if (AmigoIdComboBox.SelectedIndex == -1)
             {
                 MessageBox.Show("Seleccione un amigo.",
                    "Campo Amigo", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
-            }
+            }*/
 
-            return true;
+            return esValido;
+            //return true;
         }
 
         private void BucarButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!Regex.IsMatch(PrestamoIdTextBox.Text, "^[1-9]+$"))
-            {
-                MessageBox.Show("Este Id no es valido..",
-                    "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
+        
             var encontrado = PrestamosBLL.Buscar(int.Parse(PrestamoIdTextBox.Text));
             if (encontrado != null)
             {
@@ -152,23 +151,17 @@ namespace PrestamosJuegos.UI.Registros
             if (PrestamosBLL.Guardar(prestamos))
             {
                 Limpiar();
-                MessageBox.Show("Se a Guardado.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Transacción exitosa!.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("No se pudo Guardar Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Transacción Fallida..", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void EliminarButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!Regex.IsMatch(PrestamoIdTextBox.Text, "^[1-9]+$"))
-            {
-                MessageBox.Show("El Id no es valido.",
-                    "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
+           
             if (PrestamosBLL.Eliminar(int.Parse(PrestamoIdTextBox.Text)))
             {
                 Limpiar();

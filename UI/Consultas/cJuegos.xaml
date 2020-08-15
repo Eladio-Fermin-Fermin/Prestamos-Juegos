@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrestamosJuegos.UI.Consultas"
         mc:Ignorable="d"
-        Title="Consulta Juegos" Height="450" Width="800">
+        Title="Consulta Juegos" Height="450" Width="635">
     <Grid>
 
         <StackPanel Orientation="Vertical" Margin="10,5,10,0">
@@ -46,14 +46,7 @@
 
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" >
-                <DataGrid x:Name="DatosDataGrid" ItemsSource="{Binding Juegos}" Height="350" Width="527">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding JuegoId}"/>
-                        <DataGridTextColumn Header="Fecha Compra" IsReadOnly="True" Binding="{Binding FechaCompra, StringFormat=dd/MM/yyy}"/>
-                        <DataGridTextColumn Header="Descripción" IsReadOnly="True" Binding="{Binding Descripcion}"/>
-                        <DataGridTextColumn Header="Precio" IsReadOnly="True" Binding="{Binding Precio}"/>
-                        <DataGridTextColumn Header="Existencia" IsReadOnly="True" Binding="{Binding Existencia}"/>
-                    </DataGrid.Columns>
+                <DataGrid x:Name="DatosDataGrid" ItemsSource="{Binding Juegos}" Height="350" Width="600">
                 </DataGrid>
             </StackPanel>
         </StackPanel>

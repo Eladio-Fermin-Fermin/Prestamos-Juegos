@@ -47,14 +47,7 @@
 
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" >
-                <DataGrid x:Name="DatosDataGrid" Height="350" Width="527">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding PrestamoId}"/>
-                        <DataGridTextColumn Header="Fecha" IsReadOnly="True" Binding="{Binding Fecha, StringFormat=dd/MM/yyy}"/>
-                        <DataGridTextColumn Header="Amigo Id" IsReadOnly="True" Binding="{Binding AmigoId}"/>
-                        <DataGridTextColumn Header="Observación" IsReadOnly="True" Binding="{Binding Observacion}"/>
-                        <DataGridTextColumn Header="Cantidad Juegos" IsReadOnly="True" Binding="{Binding CantidadJuegos}"/>
-                    </DataGrid.Columns>
+                <DataGrid x:Name="DatosDataGrid" Height="350" Width="600">
                 </DataGrid>
             </StackPanel>
         </StackPanel>

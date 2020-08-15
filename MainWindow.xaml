@@ -55,9 +55,9 @@
                     <MenuItem x:Name="InformacionMenuItem" Header="Informacion" />
                 </MenuItem>
             </Menu>
-            <StackPanel>
+            <!--<StackPanel>
                 <Image Width="850" Source="/Resources/Logo.jpg" Height="453"/>
-            </StackPanel>
+            </StackPanel>-->
         </StackPanel>
 
 

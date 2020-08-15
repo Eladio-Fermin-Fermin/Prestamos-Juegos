@@ -62,21 +62,12 @@ namespace PrestamosJuegos.UI.Registros
                 CantidadTextBox.Focus();
                 GuardarButton.IsEnabled = true;
             }
-
-            
-
             return esValido;
         }
 
         private void BuscarButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!Regex.IsMatch(EntradaIdTextBox.Text, "^[1-9]+$"))
-            {
-                MessageBox.Show("El Id no es valido.",
-                    "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
+ 
             var encontrado = EntradasBLL.Buscar(int.Parse(EntradaIdTextBox.Text));
             if (encontrado != null)
             {
@@ -102,31 +93,24 @@ namespace PrestamosJuegos.UI.Registros
             if (EntradasBLL.Guardar(entradas))
             {
                 Limpiar();
-                MessageBox.Show("Se a Guardado.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Transacción exitosa!.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("No se Guardo Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Transacción Fallida.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void EliminarButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!Regex.IsMatch(EntradaIdTextBox.Text, "^[1-9]+$"))
-            {
-                MessageBox.Show("El Id no es valido.",
-                    "Id no valido", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
             if (EntradasBLL.Eliminar(int.Parse(EntradaIdTextBox.Text)))
             {
                 Limpiar();
-                MessageBox.Show("Se Elimino el Registro", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Se Elimino el Registro.", "Exito.", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("No se pudo Eliminar este registro Algo salio mal.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No fue posible eliminar el registro.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

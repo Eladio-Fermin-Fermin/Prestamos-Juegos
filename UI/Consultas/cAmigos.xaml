@@ -49,19 +49,8 @@
 
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" >
-                <DataGrid x:Name="DatosDataGrid" ItemsSource="{Binding Amigos}" Height="350" Width="527">
-                    <DataGrid.Columns>
-
-                        <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding AmigoId}"/>
-                        <DataGridTextColumn Header="Nombres" IsReadOnly="True" Binding="{Binding Nombres}"/>
-                        <DataGridTextColumn Header="Dirección" IsReadOnly="True" Binding="{Binding Direccion}"/>
-                        <DataGridTextColumn Header="Teléfono" IsReadOnly="True" Binding="{Binding Telefono}"/>
-                        <DataGridTextColumn Header="Celular" IsReadOnly="True" Binding="{Binding Celular}"/>
-                        <DataGridTextColumn Header="Email" IsReadOnly="True" Binding="{Binding Email}"/>
-                        <DataGridTextColumn Header="FechaNacimiento" IsReadOnly="True" Binding="{Binding FechaNacimiento, StringFormat=dd/MM/yyy}"/>
-
-                    </DataGrid.Columns>
-
+                <DataGrid x:Name="DatosDataGrid" ItemsSource="{Binding Amigos}" Height="350" Width="600">
+                    
                 </DataGrid>
             </StackPanel>
         </StackPanel>
