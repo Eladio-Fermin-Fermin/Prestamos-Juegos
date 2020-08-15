@@ -62,13 +62,6 @@ namespace PrestamosJuegos.UI.Registros
                 return false;
             }
 
-           /* if (!Regex.IsMatch(CantidadTextBox.Text, "^[1-9]+${1,9}"))
-            {
-                MessageBox.Show("Esta cantidad no es validad.",
-                    "Cantidad no valido", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }*/
-
             return true;
         }
 
@@ -84,13 +77,6 @@ namespace PrestamosJuegos.UI.Registros
                 PrestamoIdTextBox.Focus();
                 GuardarButton.IsEnabled = true;
             }
-
-            /*if (AmigoIdComboBox.SelectedIndex == -1)
-            {
-                MessageBox.Show("Seleccione un amigo.",
-                   "Campo Amigo", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }*/
 
             return esValido;
             //return true;

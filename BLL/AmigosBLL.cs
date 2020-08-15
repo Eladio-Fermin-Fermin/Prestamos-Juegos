@@ -80,29 +80,6 @@ namespace PrestamosJuegos.BLL
             return ok;
         }
 
-        public static bool ExisteTelefono(string telefono)
-        {
-            Contexto contexto = new Contexto();
-            bool ok;
-
-            try
-            {
-                ok = contexto.Amigos.Any(a => a.Telefono.Equals(telefono));
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
-                contexto.Dispose();
-            }
-
-            return ok;
-        }
-
-
         //Metodo Insertar.
         private static bool Insertar(Amigos amigo)
         {
